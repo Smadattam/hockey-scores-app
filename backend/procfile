@@ -1,1 +1,1 @@
-web: node hockey-scores-app.js
+web: node hockey-api-app.js
