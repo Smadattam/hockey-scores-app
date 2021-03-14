@@ -5,6 +5,7 @@ const app = express(); // create an instance of the express module (app is the c
 const cors = require('cors');  // import cors module from express
 const fetch = require('node-fetch'); // import node-fetch (enables the fetch API to be used server-side)
 const PORT = process.env.PORT || 5000; // use either the host env var port (PORT) provided by Heroku or the local port (5000) on your machine
+app.use(cors());
 
 app.get('/', (req, res) => { // send a get request to root directory ('/' is this file (hockey-api-app.js))
   fetch('https://statsapi.web.nhl.com/api/v1/standings') // fetch activity from NHL API 
