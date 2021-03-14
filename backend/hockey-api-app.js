@@ -15,7 +15,7 @@ app.get('/', (req, res) => { // send a get request to root directory ('/' is thi
     })
 })
 
-app.get('/standings', cors(), (req, res) => { // send a get request to root directory ('/' is this file (hockey-api-app.js))
+app.get('/standings', (req, res) => { // send a get request to root directory ('/' is this file (hockey-api-app.js))
   fetch('https://statsapi.web.nhl.com/api/v1/standings') // fetch activity from NHL API 
     .then(res => res.json()) // return a promise containing the response
     .then(json => res.send(json.records)) // extracts the records value from the JSON responseand sends it to the client
