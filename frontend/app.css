@@ -1,0 +1,44 @@
+body {
+    background-color: "red";
+
+}
+
+nav {
+    list-style : none;
+    background-color : black;
+    color : white;
+    width : 100vw;
+    margin-right : 0px;
+    padding : 0;
+    border : 0;
+    border-collapse : collapse;
+    display : table;
+    height : 40px;
+}
+
+nav a {
+    color : gray;
+}
+
+nav ul {
+    display : table-row;
+}
+
+nav li {
+    margin : 0;
+    display : table-cell;
+}
+
+div {
+    background-color : white;
+    color : black;
+    padding : 20px;
+}
+
+tr:nth-child(odd) {
+    background-color : lightgray;
+}
+
+#transparent {
+    opacity: 0.0;
+}
