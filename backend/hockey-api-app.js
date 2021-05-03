@@ -1,4 +1,4 @@
-// Code based on https://github.com/Codecademy/deploying-backend-with-heroku-sample
+// Code based on template from https://github.com/Codecademy/deploying-backend-with-heroku-sample
 
 const express = require('express'); // import express module (simplifies routing/requests, among other things)
 const app = express(); // create an instance of the express module (app is the conventional variable name used)
@@ -12,24 +12,32 @@ const jsonConversionDict = {'TEAM':['team', 'name'], 'ID':['team', 'id'], 'PTS':
                                 'GP':['gamesPlayed'], 'W':['leagueRecord', 'wins'], 'L':['leagueRecord', 'losses'], 
                                 'OTL':['leagueRecord', 'ot'], 'RANK':['divisionRank']};
 const scoreboardColumnList = [ 'RANK', 'TEAM', 'PTS', 'GP', 'PTS%', 'W', 'L', 'OTL'];
-const NHL2021DivisionAlignmentDictionary = {0:'central', 1:'west', 2:'east', 3:'north'};
+const NHL2021DivisionAlignmentDictionary = {0:'central', 1:'west', 2:'north', 3:'east'};
 
-// standings master data object
+// Standings master data object
 var divisionStandingsObject = {};
 
+// Function that checks if an input value is a float
+function isFloat(n) {
+  return Number(n) === n && n % 1 !== 0;
+}
+
+function roundHundredths(n) {
+  return Math.round(n * 100) / 100;
+}
 
 // Extract one row (one team's record info) of JSON data from the NHL API. Returns row as a dictionary.
 function extractRowFromJsonObj(teamStandingJsonObject) {
   var newJsonRow = {};
-  //console.log(`debug3: ${teamStandingJsonObject}`);
   for ( var i = 0; i < scoreboardColumnList.length; i++) {
       var column = scoreboardColumnList[i];
       var jsonValue = teamStandingJsonObject;
-      //console.log(`debug3: ${jsonValue}`)
       for ( var j=0; j < jsonConversionDict[column].length; j++) {
           var jsonLayer = jsonConversionDict[column][j];
-          //console.log(`debug3: ${jsonLayer}`);
           jsonValue = jsonValue[jsonLayer];
+      }
+      if (isFloat(jsonValue)) {
+        jsonValue = roundHundredths(jsonValue);
       }
       newJsonRow[column] = jsonValue;
   }
@@ -39,7 +47,6 @@ function extractRowFromJsonObj(teamStandingJsonObject) {
 // extract info from JSON returned from NHL API
 function extractTableDataFromJson(teamStandingJsonObject) {
   var newJsonObject = {};
-  //console.log(`debug2: ${teamStandingJsonObject}`);
   for (var item in teamStandingJsonObject) {
       const team = teamStandingJsonObject[item];
       const teamObject = extractRowFromJsonObj(team);
@@ -51,14 +58,10 @@ function extractTableDataFromJson(teamStandingJsonObject) {
 // extract all division info from JSON returned from NHL API
 function extractStandingsDataFromJson(leagueStandingsByDivisionJsonObject) {
   var newJsonObject = {};
-  //console.log(`debug: ${leagueStandingsByDivisionJsonObject}`);
   for (key in leagueStandingsByDivisionJsonObject) {
-    //console.log(`debug: ${key}`);
-    //console.log(`debug: ${leagueStandingsByDivisionJsonObject[key]}`)
     const newJsonKey = NHL2021DivisionAlignmentDictionary[key];
     newJsonObject[newJsonKey] = extractTableDataFromJson(leagueStandingsByDivisionJsonObject[key]['teamRecords']);
   }
-  console.log(newJsonObject);
   return newJsonObject;
 }
 

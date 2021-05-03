@@ -1,26 +1,34 @@
 body {
-    background-color: "red";
+    background-color: turquoise;
+    height : 100vh;
+}
 
+html {
+    height : 100vh;
 }
 
 nav {
-    list-style : none;
+    list-style : inline;
     background-color : black;
     color : white;
-    width : 100vw;
+    width : 100%;
+    margin-top : 0px;
+    margin-left : 0px;
     margin-right : 0px;
     padding : 0;
     border : 0;
     border-collapse : collapse;
     display : table;
-    height : 40px;
+    height : 15px;
 }
 
 nav a {
     color : gray;
+    font-size : 30px;
 }
 
 nav ul {
+    margin : 0;
     display : table-row;
 }
 
@@ -30,15 +38,53 @@ nav li {
 }
 
 div {
-    background-color : white;
     color : black;
-    padding : 20px;
+    padding : 5px;
+    background-repeat:no-repeat;
+    background-size:cover;
+    margin-top : 5px;
 }
 
 tr:nth-child(odd) {
     background-color : lightgray;
 }
 
+.header-icon {
+    max-height : 30px;
+    max-width : 30px;
+    margin-right : 5px;
+    margin-left : 5px;
+    float : right;
+}
+
+.btn-div-wrapper {
+    float : center;
+}
+
+#standings-card-title {
+    text-align : center;
+}
+
+#division-table-title {
+    text-align : left;
+}
+
 #transparent {
-    opacity: 0.0;
+    background : transparent;
+}
+
+#east, #west, #central, #north {
+    border-style : solid;
+    border-color : black;
+    border-width : thin;
+}
+
+#standings-card {
+    border-style : hidden;
+    border-radius : 25px;
+    margin-top : 50px;
+}
+
+#background-div {
+    height : 100vh;
 }
