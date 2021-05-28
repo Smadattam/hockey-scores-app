@@ -2,7 +2,7 @@ const defaultScoreboardColumnList = [ 'RANK', 'TEAM', 'PTS', 'GP', 'PTS%', 'W', 
 const blankScoreboardRow = {'RANK':'-', 'TEAM':'-', 'PTS':'-', 'GP':'-', 'PTS%':'-', 'W':'-', 'L':'-', 'OTL':'-'};
 const blankScoreboardObject = {1:blankScoreboardRow, 2:blankScoreboardRow, 3:blankScoreboardRow, 
     4:blankScoreboardRow, 5:blankScoreboardRow, 6:blankScoreboardRow, 7:blankScoreboardRow, 8:blankScoreboardRow};
-const BASE_API_ADDRESS = "http://localhost:5000";
+const BASE_API_ADDRESS = "http://hockey-scores-backend.herokuapp.com";
 const DIVISION_2020_2021_LIST = ['east', 'west', 'north', 'central'];
 var standingsMasterDataJson = {};
 
@@ -66,13 +66,12 @@ function populateScoreboard(inputTableElement, tableDataJson=blankScoreboardObje
 }
 
 const capitalizeFirstLetter = function (inputString) {
-    return inputString.charAt(0).toUpperCase() + inputString.slice(1)
+    return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 }
 
 // Function triggered on division button selection
 const divisionButton = function (event) {
     const division = event['srcElement']['id'];
-    console.log(division);
     populateScoreboard(divisonStandingsTable, tableDataJson=standingsMasterDataJson[division]);
     scoreboardTitle.innerText = capitalizeFirstLetter(division) + " Division Standings";
 }
@@ -82,8 +81,8 @@ var scoreboardDiv = document.querySelector('.score-div');
 scoreboardDiv.appendChild(divisonStandingsTable);
 const scoreboardTitle = document.querySelector('#division-table-title');
 getStandings();
-populateScoreboard(divisonStandingsTable, tableDataJson=standingsMasterDataJson[DIVISION_2020_2021_LIST[0]]);
-scoreboardTitle.innerText = capitalizeFirstLetter(DIVISION_2020_2021_LIST[0]) + " Division Standings";
+populateScoreboard(divisonStandingsTable, tableDataJson=standingsMasterDataJson['central']);
+scoreboardTitle.innerText = "Central" + " Division Standings";
 
 // Select and store document button elements and add event listeners
 const eastDivisionButton = document.querySelector('#east');

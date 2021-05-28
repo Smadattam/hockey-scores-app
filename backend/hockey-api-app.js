@@ -12,7 +12,7 @@ const jsonConversionDict = {'TEAM':['team', 'name'], 'ID':['team', 'id'], 'PTS':
                                 'GP':['gamesPlayed'], 'W':['leagueRecord', 'wins'], 'L':['leagueRecord', 'losses'], 
                                 'OTL':['leagueRecord', 'ot'], 'RANK':['divisionRank']};
 const scoreboardColumnList = [ 'RANK', 'TEAM', 'PTS', 'GP', 'PTS%', 'W', 'L', 'OTL'];
-const NHL2021DivisionAlignmentDictionary = {0:'central', 1:'west', 2:'north', 3:'east'};
+const NHL2021DivisionAlignmentDictionary = {0:'west', 1:'central', 2:'east', 3:'north'};
 
 // Standings master data object
 var divisionStandingsObject = {};
