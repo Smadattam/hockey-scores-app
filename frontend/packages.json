@@ -1,0 +1,10 @@
+{
+    "name": "hockey-scores-app",
+    "description": "Allows heroku to host static html frontend",
+    "scripts": {
+      "start": "harp server --port $PORT"
+    },
+    "dependencies": {
+      "harp": "*"
+    }
+  }
